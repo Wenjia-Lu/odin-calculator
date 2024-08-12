@@ -46,6 +46,11 @@ button {
 
 .right {
     display: flex;
+    flex-direction: column;
+}
+
+.right button{
+    flex-grow: 1;
 }
 
 div.display {

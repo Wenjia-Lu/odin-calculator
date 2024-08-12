@@ -128,6 +128,10 @@ let numberPad = document.querySelector("div.nums");
 let ops = document.querySelector("div.ops");
 let equals = document.querySelector("#equals");
 let clear = document.querySelector("#clear");
+let decimal = document.querySelector("#decimal");
+// let signButton = document.querySelector("button#sign");
+// let signText = document.querySelector("p#sign");
+
 
 // EVENT HANDLERS ========== ========== ========== ========== ==========
 
@@ -138,14 +142,26 @@ numberPad.addEventListener("click", (e) => {
 
     switch(lastClicked){
         case NUM:
-            display.innerText += e.target.innerText;
+            if(e.target.id == "decimal" && decimal.disabled == false ){
+                display.innerText += e.target.innerText;
+                decimal.disabled = true;
+            }
+            else {
+                display.innerText += e.target.innerText;
+            }
             break;
         
         case OP:
             opQ.push(op);
 
         default: 
-            display.innerText = e.target.innerText;
+            if(e.target.id == "decimal"){
+                display.innerText = "0" + e.target.innerText;
+                decimal.disabled = true;
+            }
+            else {
+                display.innerText = e.target.innerText;
+            }
     }
 
     lastClicked = NUM;
@@ -154,7 +170,7 @@ numberPad.addEventListener("click", (e) => {
 // push num to q (if applicable). Switch current selected op
 ops.addEventListener("click", (e) => {
     if(e.target.tagName != "BUTTON") return;  // bound check!
-    
+    decimal.disabled = false;
 
     switch(lastClicked){
         case NONE:
@@ -215,4 +231,5 @@ clear.addEventListener("click", () => {
     let numQ = [];
     let opQ = [];
     lastClicked = NONE;
+    decimal.disabled = false;
 })

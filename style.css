@@ -31,6 +31,11 @@ button {
     margin: 4px;
 }
 
+button:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
 .buttons {
     display: flex;
     gap: 16px;
@@ -59,4 +64,6 @@ div.display {
     width: 80%;
     background-color: gray;
     padding: 8px;
+    display: flex;
+    justify-content: center;
 }
